@@ -19,20 +19,6 @@ library(rmarkdown)
 library(grid)
 library(gridExtra)
 
-# load_library <- function(libs) {
-#   missing_libs <- libs[!(libs %in% installed.packages()[,"Package"])]
-#   if (length(missing_libs) > 0) {
-#     install.packages(missing_libs, dependencies = TRUE)
-#   }
-#   invisible(lapply(libs, library))
-# }
-# 
-# libs <- c("shiny", "shinydashboard", "shinydashboardPlus", "plotly", "tidyquant", "openxlsx",
-#           "tidyverse", "DT", "forecast", "dplyr", "mgcv", "car", "urca", "earth",
-#           "shinyWidgets", "rmarkdown", "grid", "gridExtra", "devtools")
-# 
-# load_library(libs)
-
 
 
 dashboardPage(
@@ -97,70 +83,71 @@ dashboardPage(
             width=12,
             tabPanel(title="Inicio",                             
               fluidRow(
-              column(12,
-                     p("Bienvenido a la plataforma interactiva",em("M.R.B.A."),"(Modelizador de Resistencias Bacterianas ante tratamientos Antibióticos).",
-                       style="font-size:16px; text-align: justify"),
-                      p("En esta podrás elaborar un estudio estadistico sobre el comportamiento
-                       de las resistencias bacterianas a través del ajuste de modelos.", 
-                       style="font-size:16px; text-align: justify"),
-                     p("Es una aplicacion flexible y adaptable a tus datos a demás de permitir
-                       un sinfin de opciones en el ajuste de modelos.", 
-                       style="font-size:16px; text-align: justify"),
-                     p("Para conocer más sobre el uso de esta dirígete a la pestaña",em("Guía de uso."), 
-                       style="font-size:16px; text-align: justify")
-                     ))),
+                column(
+                  12,
+                  p( "Bienvenido a la plataforma interactiva ", em("M.R.B.A."), 
+                    " (Modelizador de Resistencias Bacterianas ante tratamientos Antibióticos).",
+                    style = "font-size:16px; text-align:justify"),
+                  p( "En esta podrás elaborar un estudio estadístico sobre el comportamiento de las resistencias bacterianas a través del ajuste de modelos.", 
+                    style = "font-size:16px; text-align:justify" ),
+                  p("Esta es una aplicación flexible y adaptable a tus datos, además de permitir un sinfín de opciones en el ajuste de modelos.", 
+                    style = "font-size:16px; text-align:justify" ),
+                  p("Para conocer más sobre el uso de esta dirígete a la pestaña ", em("Guía de uso."), 
+                    style = "font-size:16px; text-align:justify" )))),
+                
             tabPanel(title="Guía de uso",                             
                      fluidRow(
                        column(12,
-                              p("Actualmente te encuentras en la pestaña de inicio.", 
+                              p("A lo largo de todas las pestañas encontrarás puntos de información, 
+                                los cuales te guiarán en la realización de tu estudio mediante el uso de 
+                                la aplicación", 
                                 style="font-size:16px; text-align: justify"),
-                              p("Antes de comenzar tu estudio y uso de la aplicación primero debes
-                                conocer varias especificaciones a tener en cuenta en cada una de las pestañas", 
+                              p("Otras funcionalidades a tener en cuenta son:", 
                                 style="font-size:16px; text-align: justify"),
-                              p("A lo largo de todas las pestañas en contraras burbujas de informacion que te explicaran
-                                que hacer para continuar el estudio o lo que ves", 
+                              p("En la primera pestaña", em("Carga de ficheros"), "es necesario que los 
+                                datos cargados estén en formato Excel. El documento debe contener las siguientes 
+                                hojas: Ocupación, ConsumosDDDpor1000Estancias, ResultadosSensibles, 
+                                ResultadosResistentes, DiccionarioConsumos, DiccionarioResistencias. 
+                                Esto es necesario ya que el servidor de la aplicación se alimenta de la 
+                                información presente en estas tablas. Podrás ver un ejemplo de estructura del 
+                                fichero en el repositorio donde se encuentra la aplicación.", 
                                 style="font-size:16px; text-align: justify"),
-                              p("En la primera pestaña",em("Carga de ficheros"),"Es necesario que los datos subidos
-                                esten en formato Excel. El documento debe contener las siguientes hojas: Ocupacion, ConsumosDDDpor1000Estancias,
-                                ResultadosSensibles, ResultadosResistentes,DiccionarioConsumos,DiccionarioResistencias.
-                                Esto es necesario ya que todo el servidor de la aplicacion utiliza la informacion presente en estas.
-                                Sin embargo, por la construccion que hemos hecho del aplicativo este permite cualquier columna dentro de estos, es decir
-                                puedes introducir cualquier antibiotico y medicamento siempre y cuando esten bien codificados en el diccionario, la plicacion.", 
+                              p("En la última pestaña,", em("Modelización"), ", puedes cargar modelos 
+                                ya predefinidos en ficheros CSV. Estos deben estar por columnas. Es decir, cada 
+                                columna será un modelo, donde las variables en la primera posición (fila) serán 
+                                las variables respuesta y el resto serán consideradas como explicativas.", 
                                 style="font-size:16px; text-align: justify"),
-                              p("En la segunda y terceras pestañas",em("Datos Iniciales y Datos Transformados"),"Puedes estudiar de manera descriptiva
-                                los datos introducidos con plots interactivos.", 
-                                style="font-size:16px; text-align: justify"),
-                              p("En la ultima pestaña, la de modelización, en caso de querer cargar los modelos en CSV estos deben estar por columnas. Es
-                                decir, cada columna será un modelo, donde las variables en la primera poscion (fila), serán las variables respuesta, el resto
-                                serán consideradas como explicativas.
-                                A lo largo de esta pestaña hay un sinfin de opcionalidades, estate atento a las burvbujas para poder exprimir al
-                                maximo la app", 
-                                style="font-size:16px; text-align: justify"),
-                              p("Encontraras en el respositorio de la app una guia de ejemplo que expone de forma hilada
-                                todas las burbujas y todo lo que hace la app.", 
-                                style="font-size:16px; text-align: justify"),
+                              p("En el repositorio de la app encontrarás una guía de uso, ficheros de 
+                                carga de ejemplos y el trabajo final de grado a partir del cual nace M.R.B.A..", 
+                                style="font-size:16px; text-align: justify")
                        ))),
+                     
             tabPanel(title="Autor",                             
                      fluidRow(
                        column(12,
                               h3(strong("Oscar Arroyo Luque")),
-                              p("Soy oscar Arroyo Luque, estudiante que cierra su paso por el grado
-                                de Estadistica con este proyecto.", 
+                              p("Soy Oscar Arroyo Luque, estudiante que cierra su paso por el grado
+                                de Estadística con este proyecto.", 
                                 style="font-size:16px; text-align: justify"),
-                              p("Mi objetivo personal con la elaboracion de un trabajo final de grado
-                                siempre ha sido aportar un proyecto útil, con valor ya sea para las empresas
-                                mundo academico o las personas.", 
+                              p("Mi objetivo personal en la elaboración del trabajo final de grado 
+                                siempre ha sido aportar un proyecto útil y de valor.", 
                                 style="font-size:16px; text-align: justify"),
-                              p("EN la elaboracion de este aplicativo me doy cuenta del gran abanico de 
-                                posibilidades u oportunidades que la estadistica me brinda, sintiendo que mediante
-                                la aplicacion de mis estudios soy capaz de aportar valor", 
+                              p("En la elaboración de esta aplicación me he dado cuenta del gran 
+                                abanico de posibilidades y oportunidades que la estadística me 
+                                brinda, viendo cómo mediante la aplicación de mis estudios y el 
+                                autoaprendizaje soy capaz de crear una herramienta que facilita el 
+                                estudio estadístico a profesionales.", 
                                 style="font-size:16px; text-align: justify"),
-                              p("La estadistica me permite solucionar cuestuones y a partir de datos
-                                obtener información que sin un analisis para todos seria desconocida, lo cual me enamora
-                                mas de mis estudios.", 
+                              p("Durante la realización del estudio sobre resistencias bacterianas, 
+                                pude retarme y demostrar mis dotes como futuro profesional en el 
+                                ámbito de la estadística. Ver cómo, gracias a la estadística, somos 
+                                capaces de comprender mejor nuestro entorno y solucionar problemas 
+                                me enamora más de mis estudios.", 
                                 style="font-size:16px; text-align: justify"),
-                              p("Me siento totalmente agradecido de poder aportar mi pequeña parte desde el mundo de la estadistica.", 
-                                style="font-size:16px; text-align: justify"),
+                              p("Me siento totalmente agradecido de poder dar mi pequeña aportación 
+                                 desde el mundo de la estadística.", 
+                                style="font-size:16px; text-align: justify")
+                              
                        )))
           )
         )
@@ -445,16 +432,16 @@ dashboardPage(
                  inputId = NULL
                )),
                column(width=4,
-                                     fileInput(
-                                     inputId = "file_input_models",
-                                      label = "Suba archivo:",
-                                      accept = '.csv'
-                                              ),
-                                      uiOutput("output_select_input_modelo_1"),
+                       fileInput(
+                      inputId = "file_input_models",
+                       label = "Suba archivo:",
+                      accept = '.csv'
+                                 ),
+                       uiOutput("output_select_input_modelo_1"),
                                                         # hr(),
-                                      actionButton(inputId = 'action_button_models_1_ready', label = 'Usar modelo', icon = icon('thumbs-up', lib = 'glyphicon')),
+                       actionButton(inputId = 'action_button_models_1_ready', label = 'Usar modelo', icon = icon('thumbs-up', lib = 'glyphicon')),
 
-                                uiOutput('check_models_1')
+                       uiOutput('check_models_1')
                            ),
                           column(width=8,
                         DT::dataTableOutput('tabla_prueba_1'))
@@ -674,7 +661,7 @@ dashboardPage(
           inputId = NULL
         )),
           tabBox(title="Gráficos",width=12,id="tab_box_plots_modelos_mars",
-                 tabPanel("Respuesta sobre las predictoras",plotOutput("plotmo_mars")),
+                 tabPanel("Respuesta sobre las explicativas",plotOutput("plotmo_mars")),
                  tabPanel("Residuos",plotOutput("plot_res_mars")),
                  tabPanel("QQ - Plot", plotOutput("plot_qq_mars")),
                  tabPanel("ACF & PACF", plotOutput("plot_acf_mars")),
@@ -699,8 +686,7 @@ dashboardPage(
         )),
         column(width=12, downloadButton("export", "Download Outputs"))
           
-          # ,
-          # box(width=12,)
+
 
         )
         

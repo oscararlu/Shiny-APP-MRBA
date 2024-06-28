@@ -24,19 +24,6 @@ library(earth)
 # library(devtools)
 library(psych)
 
-# load_library <- function(libs) {
-#   missing_libs <- libs[!(libs %in% installed.packages()[,"Package"])]
-#   if (length(missing_libs) > 0) {
-#     install.packages(missing_libs, dependencies = TRUE)
-#   }
-#   invisible(lapply(libs, library))
-# }
-# 
-# libs <- c("shiny", "shinydashboard", "shinydashboardPlus", "plotly", "tidyquant", "openxlsx",
-#           "tidyverse", "DT", "forecast", "dplyr", "mgcv", "car", "urca", "earth",
-#           "shinyWidgets", "rmarkdown", "grid", "gridExtra", "devtools")
-# 
-# load_library(libs)
 
 
 
@@ -1044,43 +1031,6 @@ function(input, output) {
      return(df)
    })
    
-   # data_amc_1 <- reactive({
-   #   dat <- serie()
-   #   
-   #   m <- input$numeric_input_AMC
-   #   AMR <- c(dt$AMR)
-   #   AMC <- c(dt$AMC)
-   #   nam <- c()
-   #   df <- dat[,1]
-   #   
-   #   for(v in AMC){
-   #     for (i in 1:m) {
-   #       df <- cbind(df,stats::lag(dat[,v], i)) 
-   #       nam <- c(nam,paste(v, i, sep="_"))
-   #     }
-   #   }
-   #   
-   #   colnames(df) <- nam
-   #   return(df[,-1])
-   # })
-   # 
-
-   
-   
-   
-   
-   
-   
-   
-   # if(input$action_button_intercept_no == TRUE){
-   #   int <- NULL
-   # } else {
-   #   int <- "0"
-   # }
-   # 
-   # 
-   # a <- c(int,nam)
-   
    
    
    data_retardos_2 <- reactive({
@@ -1110,46 +1060,6 @@ function(input, output) {
      return(df)
      
    })
-   
-   # 
-   # 
-   # data_amc_2 <- reactive({
-   #   dat <- serie()
-   #   
-   #   AMC <- c(dt$AMC)
-   #   
-   #   b <- c(names(coef(modelo_a_usar())))
-   #   c <- c()
-   #   for(i in 1:length(b)){
-   #     if(substr(b[i],1,nchar(b[i])-2) %in% AMC){
-   #       c <- c(c,b[i])
-   #     }
-   #   }
-   #   
-   #   vector <- c(input$check_box_input_retardos)
-   #   
-   #   variables <- substr(vector, 1, nchar(vector) - 2)
-   #   retardos<- substr(vector, nchar(vector), nchar(vector))
-   #   retardos <- as.numeric(retardos)
-   # 
-   #   
-   #   df <- dat[,1]
-   #   nam <- c(AMR)
-   #   
-   #   for(ind in 1:length(variables)){
-   #     i <- retardos[ind]
-   #     v <- variables[ind]
-   #     df <- cbind(df,stats::lag(dat[,v], i)) 
-   #     nam <- c(nam,paste(v, i, sep="_"))
-   #   }
-   #   
-   #   
-   #   colnames(df) <- nam
-   #   df <- df[,c %in% colnames(df)]
-   #   return(df)
-   #   
-   # })
-   # 
    
    m1 <- reactive({
      
@@ -1449,116 +1359,6 @@ m2_auto <- reactive({
 })
 
 
-
-# 
-# m1_auto <- reactive({
-# 
-#   df <- forms$data
-# 
-# 
-#   if(is.null(df)){
-#     m1 <- NULL
-#   } else {
-#     dat <- serie()
-#     AMR <- dt$AMR
-#     AMC <- dt$AMC
-#     df <- dat[,1]
-#     p <- length(m3()$model$phi)
-#     nam <- c(AMR)
-#     b <- c(names(coef(modelo_a_usar())))
-#     
-#     if(p>0){
-#         for (i in 1:p) {
-#           df <- cbind(df,stats::lag(dat[,1], i))
-#           nam <- c(nam,paste(AMR, i, sep="_"))
-#         }
-#       
-#       for(v in AMC){
-#         for (i in 1:8) {
-#           if(paste(v, i, sep="_") %in% b ){
-#             df <- cbind(df,stats::lag(dat[,v], i))
-#             nam <- c(nam,paste(v, i, sep="_"))
-#           }
-#         }
-#       } 
-#     } 
-#       
-#       
-#       colnames(df) <- nam
-#       form0 <- as.formula(paste0(AMR, "~ ."))
-#       if(input$action_button_intercept_no_1 == TRUE || input$action_button_intercept_no_2==TRUE){
-#         form0 <- as.formula(paste0(AMR, "~ . - 1"))
-#       } else {
-#         form0 <- as.formula(paste0(AMR, "~ ."))
-#       }
-# 
-#       m1 <- lm(form0, na.omit(df))
-# 
-# 
-# 
-#     
-#   }
-#   return(m1)
-# })
-# 
-# m2_auto <- reactive({
-#   
-#   df <- forms$data
-#   AMR <- c(dt$AMR)
-#   
-# 
-#   if(is.null(df)){
-#     m2 <- NULL
-#   }else {
-#     dat <- serie()
-#     AMR <- dt$AMR
-#     AMC <- dt$AMC
-#     df <- dat[,1]
-#     nam <- c(AMR)
-#     p <- length(m3()$model$phi)
-#     b <- c(names(coef(modelo_a_usar())))
-#     
-#     
-#     form1<-as.formula(paste0(AMR,"~",paste0(AMR,"_",1:p,collapse="+")))
-#       if(p>0){
-#         for (i in 1:p) {
-#           df <- cbind(df,stats::lag(dat[,1], i))
-#           nam <- c(nam,paste(AMR, i, sep="_"))
-#         }
-#         
-#         for(v in AMC){
-#           for (i in 1:8) {
-#             if(paste(v, i, sep="_") %in% b ){
-#               df <- cbind(df,stats::lag(dat[,v], i))
-#               nam <- c(nam,paste(v, i, sep="_"))
-#             }
-#           }
-#         }
-#         
-#       }
-#     
-#     
-#     colnames(df) <- nam
-#     form0 <- as.formula(paste(AMR, "~."))
-#     m1 <- lm(form0, na.omit(df))
-#    
-#     if(input$select_input_AIC_2 == 2){
-#       a <- 2
-#     } else {
-#       a <- log(nrow(df))
-#     }
-#     
-#     m2<-step(m1,scope=list(lower=form1),trace=F,k=a)#log(nrow(df)))))
-#   }
-#   return(m2)
-#   
-# })
-
-
-
-
-
-
 output$summary_m1_auto <- renderPrint({
   if(is.null(m1_auto())){
     return("NULL")
@@ -1699,74 +1499,6 @@ m5 <- reactive({
 })
 
 
-
-# 
-# m5 <- reactive({
-#   if (length(coef(m2_auto())) > 2) {
-# 
-#     df <- forms$data
-# 
-#     if(is.null(df)){
-#       m5 <- NULL
-#     }else {
-#       
-#       p <- length(m3()$model$phi)
-#       pp <- p+1
-#       vars=c(names(coef(m2_auto()))[-c(1:c(pp))])
-#       np=6
-#       ng=10
-#       ms=50
-# 
-# 
-# 
-#       dat <- serie()
-#       AMR <- dt$AMR
-#       AMC <- c(dt$AMC)
-#       df <- dat[,1]
-#       nam <- c(AMR)
-#       b <- c(names(coef(modelo_a_usar())))
-#       if(p>0){
-#         for (i in 1:p) {
-#           df <- cbind(df,stats::lag(dat[,1], i))
-#           nam <- c(nam,paste(AMR, i, sep="_"))
-#         }
-#         for(v in AMC){
-#           for (i in 1:8) {
-#             if(paste(v, i, sep="_") %in% b ){
-#               df <- cbind(df,stats::lag(dat[,v], i))
-#               nam <- c(nam,paste(v, i, sep="_"))
-#             }
-#           }
-#         }
-#       } else {
-#         for (i in 1:p) {
-#           df <- cbind(df,stats::lag(dat[,1], i))
-#           nam <- c(nam,paste(AMR, i, sep="_"))
-#         }
-#         
-#       }
-#         
-#       colnames(df) <- nam
-# 
-#       if (p>0){
-#         form3<-as.formula(paste0(AMR,"~",paste0(AMR,"_",1:p,collapse="+"),"+",paste0(vars,collapse="+")))
-#       } else{
-#         form3<-as.formula(paste0(AMR,"~",paste0(vars,collapse="+")))
-#       }
-# 
-# 
-#       # form0 <- as.formula(paste0(AMR, "~."))
-# 
-#       m5<-earth(form3,data=na.omit(df),nfold=1,nk=ng,minspan=ms,
-#                 nprune=np,linpreds=paste0(AMR,"_",1:p),trace=4,pmethod="exh")
-# 
-# 
-#     }
-# 
-#     return(m5)
-#   }
-# })
-
 output$summary_mars <- renderPrint({
   if(is.null(forms$data)){
     return("NULL")
@@ -1848,32 +1580,6 @@ output$plot_final_mars <- renderPlot({
 })
 
 
-
-
-
-
-# 
-# Plot1 <- reactive({
-#   plot(
-#     x=x(), y=y(), main = "iris dataset plot", xlab = xl(), ylab = yl()
-#   )
-#   recordPlot()
-# })
-# 
-# Plot2 <- reactive({
-#   plot(
-#     x=x(), y=y(), main = "iris plot 2", xlab = xl(), ylab = yl(), col = "blue"
-#   )
-#   recordPlot()
-# })
-# 
-# output$plot <- renderPlot({
-#   Plot1()
-# })
-# 
-# output$plot2 <- renderPlot({
-#   Plot2()
-# })
 
 output$export <- downloadHandler(
   filename =  function() {"Plot_output.pdf"},
